@@ -14,7 +14,8 @@ export class UsersService {
     private userSettingsModel: Model<UserSettings>,
   ) {}
 
-  async createUser({ settings, ...createUserDto }: CreateUserDto) {
+  async createUser({ settings,username ,...createUserDto }: CreateUserDto) {
+    if(!username) return;
     if (settings) {
       const newSettings = new this.userSettingsModel(settings);
       const savedNewSettings = await newSettings.save();
